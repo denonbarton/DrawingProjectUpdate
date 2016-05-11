@@ -28,22 +28,42 @@ public class ShapePanel extends JPanel
 	
 	public void addRectangle()
 	{
-
+		int xPosition = (int)(Math.random() * 150);
+		int yPosition = (int)(Math.random() * 150);
+		int width = (int)(Math.random() * 150);
+		int height = (int)(Math.random() * 150);
+		
+		Rectangle rectangle = new Rectangle (xPosition, yPosition, width, height);
+		rectangleList.add(rectangle);
 	}
 
 	public void addSquare()
 	{
-
+		int xPosition = (int)(Math.random() * 150);
+		int yPosition = (int)(Math.random() * 150);
+		int width = (int)(Math.random() * 150);
+		
+		
+		Rectangle square = new Rectangle (xPosition, yPosition, width, width);
+		squareList.add(square);
 	}
 
 	public void addEllipse()
 	{
-
+		int xPosition = (int)(Math.random() * getWidth()), yPosition = (int)(Math.random() * getHeight());
+		int width = (int)(Math.random() * 200), height = (int)(Math.random() * 200);
+		
+		Ellipse2D currentEllipse = new Ellipse2D.Double(xPosition,yPosition,width,height);
+		ellipseList.add(currentEllipse);
 	}
 	
 	public void addCircle()
 	{
+		int xPosition = (int)(Math.random() * getWidth()), yPosition = (int)(Math.random() * getHeight());
+		int size = (int)(Math.random() * 200);
 		
+		Ellipse2D currentEllipse = new Ellipse2D.Double(xPosition,yPosition,size,size);
+		ellipseList.add(currentEllipse);
 	}
 	
 	public void addTriangle()
@@ -67,13 +87,16 @@ public class ShapePanel extends JPanel
 		
 		for(int side = 0; side < numberOfSides; side++)
 		{
-			xPoints[side] = (int)(Math.random() * 2000);
-			yPoints[side] = (int)(Math.random() * 2000);
+			xPoints[side] = (int)(Math.random() * 200);
+			yPoints[side] = (int)(Math.random() * 200);
 		}
 		
 		Polygon myPolygon = new Polygon(xPoints, yPoints, numberOfSides);
 		polygonList.add(myPolygon);
+		
 	}
+	
+	
  	
 	@Override
 	protected void paintComponent(Graphics currentGraphics)
@@ -94,6 +117,59 @@ public class ShapePanel extends JPanel
 			mainGraphics.draw(currentTriangle);
 		}
 		
+		
+		for(Rectangle currentRectangle : rectangleList)
+		{
+			int red = (int)(Math.random() * 256);
+			int green = (int)(Math.random() * 256);
+			int blue = (int)(Math.random() * 256);
+			
+			int penSize = (int)(Math.random() * 10)+3;
+			mainGraphics.setColor(new Color(red, green, blue));
+			mainGraphics.setStroke(new BasicStroke(penSize));
+			
+			mainGraphics.draw(currentRectangle);
+		}
+		
+		for(Ellipse2D currentCircle : circleList)
+		{
+			int red = (int)(Math.random() * 256);
+			int green = (int)(Math.random() * 256);
+			int blue = (int)(Math.random() * 256);
+			
+			int penSize = (int)(Math.random() * 10)+3;
+			mainGraphics.setColor(new Color(red, green, blue));
+			mainGraphics.setStroke(new BasicStroke(penSize));
+			
+			mainGraphics.draw(currentCircle);
+		}
+		
+		for(Ellipse2D currentEllipse2D : ellipseList)
+		{
+			int red = (int)(Math.random() * 256);
+			int green = (int)(Math.random() * 256);
+			int blue = (int)(Math.random() * 256);
+			
+			int penSize = (int)(Math.random() * 10)+3;
+			mainGraphics.setColor(new Color(red, green, blue));
+			mainGraphics.setStroke(new BasicStroke(penSize));
+			
+			mainGraphics.draw(currentEllipse2D);
+		}
+		
+		for(Rectangle currentRectangle : squareList)
+		{
+			int red = (int)(Math.random() * 256);
+			int green = (int)(Math.random() * 256);
+			int blue = (int)(Math.random() * 256);
+			
+			int penSize = (int)(Math.random() * 10)+3;
+			mainGraphics.setColor(new Color(red, green, blue));
+			mainGraphics.setStroke(new BasicStroke(penSize));
+			
+			mainGraphics.draw(currentRectangle);
+		}
+		
 		for(Polygon current : polygonList)
 		{
 			int red = (int)(Math.random() * 256);
@@ -109,6 +185,13 @@ public class ShapePanel extends JPanel
 
 	public void clear()
 	{
+		rectangleList.clear();
+		circleList.clear();
+		polygonList.clear();
+		ellipseList.clear();
+		triangleList.clear();
+		ellipseList.clear();
+		squareList.clear();
 		
 	}
 }
