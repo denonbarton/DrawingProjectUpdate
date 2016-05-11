@@ -1,5 +1,7 @@
 package ctec.view;
 
+//completed shapes
+
 import javax.swing.JPanel;
 
 import java.awt.*;
